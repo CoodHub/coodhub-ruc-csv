@@ -1,0 +1,12 @@
+{
+  "name": "coodhub-ruc-csv",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ./scripts/build-padron.mjs"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.12",
+    "axios": "^1.7.0"
+  }
+}

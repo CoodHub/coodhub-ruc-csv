@@ -1,0 +1,36 @@
+name: Build RUC CSV (gz)
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 3 * * *"   # 03:00 UTC diario
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci || npm i --omit=dev
+
+      - name: Download & build (gz)
+        env:
+          SOURCE_URL_ROOT: ${{ secrets.SOURCE_URL_ROOT }}
+        run: npm run build
+
+      - name: Commit & push (only gz)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/padron_ruc.csv.gz
+          git commit -m "chore(ruc): update padron_ruc.csv.gz [skip ci]" || echo "No changes"
+          git pull --rebase origin main || true
+          git push

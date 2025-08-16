@@ -1,0 +1,6 @@
+node_modules/
+tmp/
+data/*.csv
+data/*.zip
+# mantenemos el comprimido:
+!data/padron_ruc.csv.gz
