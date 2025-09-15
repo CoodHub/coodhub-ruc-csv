@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
 
-# >>> CORRECCIÓN: "retention-days" movido al nivel superior correcto.
-retention-days: 1
-
 jobs:
   build:
     runs-on: ubuntu-latest
