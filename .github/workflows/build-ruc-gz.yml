@@ -3,12 +3,13 @@ name: Build RUC CSV (gz)
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "0 3 * * *"    # 03:00 UTC diario
+    - cron: "0 3 * * *" # 03:00 UTC diario
 
 permissions:
   contents: write
 
-retention-days: 1 # Agrega esta línea aquí
+# >>> CORRECCIÓN: "retention-days" movido al nivel superior correcto.
+retention-days: 1
 
 jobs:
   build:
